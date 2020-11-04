@@ -10,6 +10,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
+    "commit": "cz",
     "dev": "ts-node src/index.ts",
     "build": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",
@@ -63,6 +64,7 @@
     "@typescript-eslint/parser": "^4.0.1",
     "ava": "^3.12.1",
     "codecov": "^3.5.0",
+    "commitizen": "^4.2.2",
     "cspell": "^4.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.8.0",
