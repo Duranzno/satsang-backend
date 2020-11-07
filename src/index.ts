@@ -1,5 +1,3 @@
-export * from "./lib/async"
-export * from "./lib/number"
 import { PrismaClient } from "@prisma/client"
 import * as bodyParser from "body-parser"
 import express from "express"
@@ -89,8 +87,9 @@ app.get("/filterPosts", async (req, res) => {
   res.json(draftPosts)
 })
 
-app.listen(3000, () =>
+const server = app.listen(3000, () =>
   console.log(
     "🚀 Server ready at: http://localhost:3000\n⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api"
   )
 )
+export default server;
