@@ -1,0 +1,24 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/alejandro/Development/satsang/backend/logs/.dd4e80f8fa7d673c30e2e41a300f75b7e24ef6c2-audit.json",
+    "files": [
+        {
+            "date": 1604884107903,
+            "name": "/home/alejandro/Development/satsang/backend/logs/2020-11-08.log",
+            "hash": "0f350ede64d58bd3b2fa23b0fc04c179"
+        },
+        {
+            "date": 1604923544375,
+            "name": "/home/alejandro/Development/satsang/backend/logs/2020-11-09.log",
+            "hash": "b62d1dc1e63ae969757274789777df94"
+        },
+        {
+            "date": 1604926516949,
+            "name": "/home/alejandro/Development/satsang/backend/logs/2020-11-09.log",
+            "hash": "1582d16756f9f47963724e9ad56714f1"
+        }
+    ]
+}

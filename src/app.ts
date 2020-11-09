@@ -1,19 +1,16 @@
 import express from "express"
 import { Application } from "express"
 // import { PrismaClient } from "@prisma/client"
-import swaggerUi from "swagger-ui-express"
 
-import swaggerDocument from "./swagger.json"
-import { MainRouter } from "./routes"
-import errorHandlers from "./middleware/errorHandlers"
+// import errorHandlers from "./middleware/errorHandlers"
 import middleware from "./middleware"
 import { applyMiddleware } from "./utilities/shortcuts"
+import { MainRouter } from "./routes"
 
 const app: Application = express()
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+// app.get("/", (_req, res) => { res.send("hi") })
+// applyMiddleware(errorHandlers, app)
 app.use("/api", MainRouter)
-applyMiddleware(errorHandlers, app)
 applyMiddleware(middleware, app)
 
 export default app

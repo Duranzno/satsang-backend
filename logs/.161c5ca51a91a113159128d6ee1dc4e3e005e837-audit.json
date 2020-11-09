@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/alejandro/Development/satsang/backend/logs/.161c5ca51a91a113159128d6ee1dc4e3e005e837-audit.json",
+    "files": [
+        {
+            "date": 1604882918905,
+            "name": "/home/alejandro/Development/satsang/backend/logs/2020-11-08.log",
+            "hash": "a31da3481a183ea40ac45ebfbd225555"
+        }
+    ]
+}

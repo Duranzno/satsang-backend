@@ -1,9 +1,5 @@
 import * as path from "path"
 
-import * as dotenv from "dotenv"
-
-dotenv.config({ path: ".env" })
-
 export const ENVIRONMENT = process.env.APP_ENV ?? "dev"
 export const IS_PRODUCTION = process.env.APP_ENV === "production"
 export const APP_PORT = process.env.APP_PORT ?? 3000

@@ -1,9 +1,6 @@
 import { Router } from "express"
 import winston from "winston"
 import expressWinston from "express-winston"
-import dotenv from "dotenv"
-
-dotenv.config()
 
 const handleLogging = (router: Router) =>
   router.use(

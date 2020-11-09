@@ -1,7 +1,10 @@
+import dotenv from "dotenv"
+
 import app from "./app"
 import { APP_PORT } from "./utilities/secrets"
 import logger from "./utilities/logger"
 
+dotenv.config()
 app
   .listen(APP_PORT, () => {
     logger.info(`server running on port : ${APP_PORT}`)
