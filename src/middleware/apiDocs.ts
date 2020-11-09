@@ -7,7 +7,7 @@ export const handleAPIDocs = (router: Router) => {
     definition: {
       info: {
         title: "Satsang Backend API",
-        version: "0.0.1",
+        version: `${process.env.npm_package_version}`,
       },
       host: "localhost:3000",
       openapi: "3.0.0",
@@ -16,6 +16,6 @@ export const handleAPIDocs = (router: Router) => {
     apis: ["src/routes/*.ts"],
   })
   const options: swaggerUi.SwaggerUiOptions = {}
-  router.use("/docs", swaggerUi.serve)
-  router.get("/docs", swaggerUi.setup(swaggerSpec, options))
+  router.use("/", swaggerUi.serve)
+  router.get("/", swaggerUi.setup(swaggerSpec, options))
 }
