@@ -13,7 +13,7 @@
     "commit": "cz",
     "dev": "ts-node src/index.ts",
     "heroku":"node build/main/index.js",
-    "build": "run-p build:*",
+    "build": "run-p build:main",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
     "fix": "run-s fix:*",
