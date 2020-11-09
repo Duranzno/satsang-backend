@@ -1,12 +1,14 @@
-export default  {
-  "roots": [
-    "<rootDir>/src"
+
+module.exports= {
+  preset: 'ts-jest',
+  coverageDirectory: "coverage",
+  "collectCoverage": false,
+  "coverageReporters": [
+    "lcov",
+    "html",
+    "json",
   ],
-  "testMatch": [
-    "**/__tests__/**/*.+(ts|tsx|js)",
-    "**/?(*.)+(spec|test).+(ts|tsx|js)"
-  ],
-  "transform": {
-    "^.+\\.(ts|tsx)$": "ts-jest"
-  },
-}
+  testEnvironment: "./prisma/prisma-test-environment.js",
+  moduleDirectories: ["node_modules", "<rootDir>"],
+  collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}", "!**/*.d.ts", "!**/node_modules/**"]
+};

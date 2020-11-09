@@ -39,3 +39,4 @@ if (!IS_PRODUCTION) {
 prisma.$on("info", (e) => logger.info(`info log on DB Side`, e))
 prisma.$on("warn", (e) => logger.warn(`warning log on DB Side`, e))
 prisma.$on("error", (e) => logger.error(`error log on DB Side`, e))
+export default prisma

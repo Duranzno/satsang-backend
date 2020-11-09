@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 import app from "./app"
 import { PORT } from "./utilities/secrets"
 import logger from "./utilities/logger"
-import { prisma } from "./db"
+import prisma from "./db"
 
 
 dotenv.config()

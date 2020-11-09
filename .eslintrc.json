@@ -10,7 +10,7 @@
   "ignorePatterns": [
     "node_modules",
     "build",
-    "coverage"
+    "coverage",
   ],
   "plugins": [
     "import",
