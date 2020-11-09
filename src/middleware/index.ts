@@ -1,27 +1,29 @@
-// import {
-//   handleBodyRequestParsing,
-//   handleCompression,
-//   handleCookie,
-//   handleCors,
-//   handleSession,
-// } from "./common"
+import {
+  handleBodyRequestParsing,
+  handleCaching,
+  handleCompression,
+  handleCookie,
+  handleCors,
+  handleSession,
+} from "./common"
 import { handleAPIDocs } from "./apiDocs"
-// import {
-//   handleHTTPHeaders,
-//   // handleCSRF,
-//   // handleRateLimit
-// } from "./security"
-// import { handleLogging } from "./logging"
+import {
+  handleHTTPHeaders,
+  // handleCSRF,
+  // handleRateLimit
+} from "./security"
+import { handleLogging } from "./logging"
 
 export default [
-  // handleCors,
-  // handleBodyRequestParsing,
-  // handleCompression,
-  // handleCookie,
-  // handleSession,
+  handleCors,
+  handleBodyRequestParsing,
+  handleCompression,
+  handleCookie,
+  handleSession,
   handleAPIDocs,
-  // handleHTTPHeaders,
+  handleCaching,
+  handleHTTPHeaders,
+  handleLogging,
   // handleRateLimit,
   // handleCSRF,
-  // handleLogging,
 ]

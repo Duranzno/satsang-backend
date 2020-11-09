@@ -4,14 +4,14 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 model User {
   id             Int       @id @default(autoincrement())
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-  name           String?   @unique
+  name           String?
   email          String    @unique
   hashedPassword String?
   role           String    @default("user")
@@ -39,7 +39,6 @@ model Category {
   events Event[]
 }
 
-/// These will be the online/offline events
 model Event {
   id          String    @id @default(uuid())
   createdAt   DateTime  @default(now())

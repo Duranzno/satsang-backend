@@ -11,7 +11,6 @@ export const handleAPIDocs = (router: Router) => {
       },
       host: "localhost:3000",
       openapi: "3.0.0",
-      servers: [{ url: "/api" }],
     },
     apis: ["src/routes/*.ts"],
   })

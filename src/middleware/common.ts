@@ -4,6 +4,7 @@ import bodyParser from "body-parser"
 import compression from "compression"
 import cookieParser from "cookie-parser"
 import session from "express-session"
+import cacheControl from 'express-cache-controller'
 
 import { SESSION_SECRET } from "../utilities/secrets"
 
@@ -31,4 +32,11 @@ export const handleCompression = (router: Router) => {
 
 export const handleCookie = (router: Router) => {
   router.use(cookieParser())
+}
+export const handleCaching = (router: Router) => {
+
+  router.use(cacheControl({
+    maxAge: 300,
+    public: true,
+  }))
 }
