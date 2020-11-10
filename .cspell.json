@@ -15,6 +15,7 @@
     "globby",
     "libauth",
     "mkdir",
+    "jest",
     "prettierignore",
     "sandboxed",
     "satsang",

@@ -11,6 +11,7 @@
     "node_modules",
     "build",
     "coverage",
+    "./*.js"
   ],
   "plugins": [
     "import",
@@ -22,7 +23,6 @@
     "plugin:eslint-comments/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/typescript",
-    // "plugin:functional/lite",
     "prettier",
     "prettier/@typescript-eslint"
   ],
@@ -50,6 +50,16 @@
       "error",
       {
         "newlines-between": "always"
+      }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "object": false,
+          "any": false
+        },
+        "extendDefaults": true
       }
     ],
     "sort-imports": [

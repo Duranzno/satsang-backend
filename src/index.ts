@@ -5,7 +5,6 @@ import { PORT } from "./utilities/secrets"
 import logger from "./utilities/logger"
 import prisma from "./db"
 
-
 dotenv.config()
 app
   .listen(PORT, () => {
@@ -14,7 +13,7 @@ app
   })
   .on("error", (e) => logger.error("error on app", e))
   .on("close", async () => {
-    await prisma.$disconnect();
+    await prisma.$disconnect()
     logger.info(`server closed`)
     console.log(`server closed`)
   })

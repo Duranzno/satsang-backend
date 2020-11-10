@@ -9,4 +9,4 @@ coverage
 package-lock.json
 .env
 swagger.json
-logs/.*-audit.json
+logs/*

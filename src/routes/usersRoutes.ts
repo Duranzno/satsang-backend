@@ -28,7 +28,6 @@ const router: Router = Router()
  *           format: int64
  */
 
-
 /**
  * @swagger
  * /api/users:
@@ -46,9 +45,9 @@ const router: Router = Router()
  *           items:
  *             $ref: '#/definitions/User'
  */
-router.get('/', (_req, _res) => {
+router.get("/", (_req, _res) => {
   // Your implementation logic comes here ...
-});
+})
 
 /**
  * @swagger
@@ -74,9 +73,9 @@ router.get('/', (_req, _res) => {
  *         schema:
  *           $ref: '#/definitions/User'
  */
-router.post('/', (_req, _res) => {
+router.post("/", (_req, _res) => {
   // Your implementation logic comes here ...
-});
+})
 /**
  * @swagger
  * /api/users/{id}:
