@@ -7,5 +7,9 @@ services:
     env_file: ./.env #Here we are using the already existing .env.local file
     ports:
       - "5432:5432"
+  app:
+    image: satsang-backend
+    ports:
+      - "3000:3000"
 volumes:
   data:

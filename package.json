@@ -12,7 +12,7 @@
   "scripts": {
     "commit": "cz",
     "dev": "ts-node src/index.ts",
-    "heroku":"node build/main/index.js",
+    "heroku": "node build/main/index.js",
     "build": "run-p build:main",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
@@ -64,6 +64,7 @@
     "express-session": "^1.17.1",
     "express-winston": "^4.0.5",
     "helmet": "^4.2.0",
+    "node": "^15.0.1",
     "swagger-jsdoc": "^5.0.1",
     "swagger-ui-express": "^4.1.4",
     "winston": "^3.3.3",
