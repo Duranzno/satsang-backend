@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { query } from 'winston';
 
 import { IS_PRODUCTION } from './utilities';
 import logger from './utilities/logger';
@@ -29,12 +30,12 @@ if (!IS_PRODUCTION) {
     const before = Date.now();
     const result = await next(params);
     const after = Date.now();
-    console.log(
+    logger.info(
       `Query ${params.model}.${params.action} took ${after - before}ms`
     );
     return result;
   })
-  prisma.$on("query", (e) => logger.info(`query log on DB Side`, e))
+  // prisma.$on("query", (e) => logger.info(`query log on DB Side`, e))
 }
 prisma.$on("info", (e) => logger.info(`info log on DB Side`, e))
 prisma.$on("warn", (e) => logger.warn(`warning log on DB Side`, e))

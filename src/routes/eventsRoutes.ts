@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express"
-
+import prisma from "../db"
+import { EventCreateInput, Event } from "@prisma/client"
 const router: Router = Router()
 
 /**
@@ -10,8 +11,9 @@ const router: Router = Router()
  *        - Event
  *      description: Get all events 
  */
-router.get("/", (_req: Request, res: Response) => {
-  res.send([])
+router.get("/", async (_req: Request, res: Response) => {
+  const result = await prisma.event.findMany({})
+  res.json(result)
 })
 
 /**
@@ -22,8 +24,10 @@ router.get("/", (_req: Request, res: Response) => {
  *        - Event
  *      description: Creates a new Event
  */
-router.post("/", (_req: Request, res: Response) => {
-  res.send([])
+router.post("/", async (req: Request<{}, Event, EventCreateInput>, res: Response) => {
+  const data = req.body;
+  const result = await prisma.event.create({ data: { ...data } })
+  return res.json(result)
 })
 
 /**
@@ -34,7 +38,7 @@ router.post("/", (_req: Request, res: Response) => {
  *        - Event
  *      description: Gets existing Event
  */
-router.get("/:id", (_req: Request, res: Response) => {
+router.get("/:id", async (_req: Request, res: Response) => {
   res.send([])
 })
 /**
@@ -45,7 +49,7 @@ router.get("/:id", (_req: Request, res: Response) => {
  *        - Event
  *      description: Complete Replacement of existing Post
  */
-router.put("/:id", (_req: Request, res: Response) => {
+router.put("/:id", async (_req: Request, res: Response) => {
   res.send([])
 })
 
@@ -57,7 +61,7 @@ router.put("/:id", (_req: Request, res: Response) => {
  *        - Event
  *      description: Deletes existing Post
  */
-router.delete("/:id", (_req: Request, res: Response) => {
+router.delete("/:id", async (_req: Request, res: Response) => {
   res.send([])
 })
 const EventRoutes: Router = router

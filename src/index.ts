@@ -12,7 +12,7 @@ app
     logger.info(`server running on port : ${PORT}`)
     console.log(`server running on port : ${PORT}`)
   })
-  .on("error", (e) => logger.error(e))
+  .on("error", (e) => logger.error("error on app", e))
   .on("close", async () => {
     await prisma.$disconnect();
     logger.info(`server closed`)

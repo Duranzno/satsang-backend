@@ -1,5 +1,5 @@
 
-module.exports= {
+module.exports = {
   preset: 'ts-jest',
   coverageDirectory: "coverage",
   "collectCoverage": false,

@@ -2,97 +2,15 @@ import express from "express"
 import { Application } from "express"
 // import { PrismaClient } from "@prisma/client"
 
-// import errorHandlers from "./middleware/errorHandlers"
 import middleware from "./middleware"
+import errorHandlers from "./middleware/errorHandlers"
 import { applyMiddleware } from "./utilities/shortcuts"
-import { MainRouter } from "./routes"
+import router from "./routes"
 
 const app: Application = express()
-// app.get("/", (_req, res) => { res.send("hi") })
-// applyMiddleware(errorHandlers, app)
-app.use("/api", MainRouter)
+
 applyMiddleware(middleware, app)
+app.use("/api", router)
+applyMiddleware(errorHandlers, app)
 
 export default app
-
-// const prisma = new PrismaClient()
-
-// app.post(`/user`, async (req, res) => {
-//   const result = await prisma.user.create({
-//     data: {
-//       ...req.body,
-//     },
-//   })
-//   res.json(result)
-// })
-
-// app.post(`/post`, async (req, res) => {
-//   const { title, content, authorEmail } = req.body
-//   const result = await prisma.post.create({
-//     data: {
-//       title,
-//       content,
-//       published: false,
-//       author: { connect: { email: authorEmail } },
-//     },
-//   })
-//   res.json(result)
-// })
-
-// app.put("/publish/:id", async (req, res) => {
-//   const { id } = req.params
-//   const post = await prisma.post.update({
-//     where: { id: Number(id) },
-//     data: { published: true },
-//   })
-//   res.json(post)
-// })
-
-// app.delete(`/post/:id`, async (req, res) => {
-//   const { id } = req.params
-//   const post = await prisma.post.delete({
-//     where: {
-//       id: Number(id),
-//     },
-//   })
-//   res.json(post)
-// })
-
-// app.get(`/post/:id`, async (req, res) => {
-//   const { id } = req.params
-//   const post = await prisma.post.findOne({
-//     where: {
-//       id: Number(id),
-//     },
-//   })
-//   res.json(post)
-// })
-
-// app.get("/feed", async (_req, res) => {
-//   const posts = await prisma.post.findMany({
-//     where: { published: true },
-//     include: { author: true },
-//   })
-//   res.json(posts)
-// })
-
-// app.get("/filterPosts", async (req, res) => {
-//   const { searchString }: { readonly searchString?: string } = req.query
-//   const draftPosts = await prisma.post.findMany({
-//     where: {
-//       OR: [
-//         {
-//           title: {
-//             contains: searchString,
-//           },
-//         },
-//         {
-//           content: {
-//             contains: searchString,
-//           },
-//         },
-//       ],
-//     },
-//   })
-//   res.json(draftPosts)
-// })
