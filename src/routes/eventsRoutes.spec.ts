@@ -16,19 +16,19 @@ afterAll(async () => {
 test("POST event", async () => {
   const newEvent = fakeEvent()
   const response = await request(app)
-    .post("/api/events")
+    .post("/api/event")
     .set("Content-Type", "application/json")
     .send(newEvent)
     .set("Accept", "application/json")
     .expect(200)
 
   expect(response.body.id).toBeDefined()
-  expect((response.body as Event).name).toBe(newEvent.name)
+  expect((response.body as Event).description).toBe(newEvent.description)
   const created = await prisma.event.findFirst({ where: { title: newEvent.title } })
   expect(created?.description).toBe(newEvent.description)
 })
 test("GET all events", async () => {
-  const res = await request(app).get("/api/events").expect(200)
+  const res = await request(app).get("/api/event").expect(200)
   expect(res.body).toBeDefined()
   expect(res.body?.length).toBeGreaterThanOrEqual(1)
   const first: Event = res.body.pop()
@@ -37,7 +37,7 @@ test("GET all events", async () => {
 
 test("GET specific event", async () => {
   const e = await prisma.event.create({ data: { ...fakeEvent() } })
-  const res = await request(app).get(`/api/events/${e.id}`).expect(200)
+  const res = await request(app).get(`/api/event/${e.id}`).expect(200)
   expect((res.body as Event).title).toBe(e.title)
 })
 
@@ -50,7 +50,7 @@ test("PUT specific event", async () => {
   }
 
   const res = await request(app)
-    .put(`/api/events/${e.id}`)
+    .put(`/api/event/${e.id}`)
     .set("Content-Type", "application/json")
     .send(updatedData)
     .expect(200)
@@ -66,7 +66,7 @@ test("PUT specific event", async () => {
 test("GET specific event", async () => {
   const e = await prisma.event.create({ data: { ...fakeEvent() } })
   const originalList = await prisma.event.findMany({})
-  const res = await request(app).delete(`/api/events/${e.id}`).expect(200)
+  const res = await request(app).delete(`/api/event/${e.id}`).expect(200)
 
   expect((res.body as Event).title).toBe(e.title)
 

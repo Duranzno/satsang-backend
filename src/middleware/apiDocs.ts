@@ -1,20 +1,22 @@
+import path from "path"
+
 import { Router } from "express"
-import swaggerJSDoc from "swagger-jsdoc"
+import YAML from "yamljs"
 import swaggerUi from "swagger-ui-express"
 
+import { IS_PRODUCTION } from "../utilities"
+
 export const handleAPIDocs = (router: Router) => {
-  const swaggerSpec = swaggerJSDoc({
-    definition: {
-      info: {
-        title: "Satsang Backend API",
-        version: `${process.env.npm_package_version}`,
-      },
-      host: "localhost:3000",
-      openapi: "3.0.0",
-    },
-    apis: ["src/routes/*.ts"],
-  })
   const options: swaggerUi.SwaggerUiOptions = {}
+  const swaggerSpec = YAML.load(path.join(__dirname, "..", "openapi.yaml"))
+  swaggerSpec.host = "localhost:3000"
+  swaggerSpec.info.version = `${process.env.npm_package_version}`
+  if (!IS_PRODUCTION) {
+    swaggerSpec.servers.unshift({
+      url: "http://localhost:3000/",
+      description: "Localhost, only for development",
+    })
+  }
   router.use("/", swaggerUi.serve)
   router.get("/", swaggerUi.setup(swaggerSpec, options))
 }

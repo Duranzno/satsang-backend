@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "satsang-backend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "satsang-backend",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -61,7 +61,8 @@
     "swagger-jsdoc": "^5.0.1",
     "swagger-ui-express": "^4.1.4",
     "winston": "^3.3.3",
-    "winston-daily-rotate-file": "^4.5.0"
+    "winston-daily-rotate-file": "^4.5.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
@@ -80,6 +81,7 @@
     "@types/swagger-jsdoc": "^3.0.2",
     "@types/swagger-ui-express": "^4.1.2",
     "@types/winston": "^2.4.4",
+    "@types/yamljs": "^0.2.31",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "codecov": "^3.5.0",

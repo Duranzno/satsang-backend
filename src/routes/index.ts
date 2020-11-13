@@ -6,9 +6,9 @@ import EventRoutes from "./eventsRoutes"
 import UserRoutes from "./usersRoutes"
 
 const router = Router()
-router.use("/users", UserRoutes)
+router.use("/user", UserRoutes)
 router.use("/auth", AuthRoutes)
-router.use("/categories", CategoriesRoutes)
-router.use("/events", EventRoutes)
+router.use("/categorie", CategoriesRoutes)
+router.use("/event", EventRoutes)
 
 export default router

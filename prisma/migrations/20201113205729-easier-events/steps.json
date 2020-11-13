@@ -1,0 +1,33 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "name"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Event",
+      "field": "name"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Event",
+      "field": "description",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Event",
+      "field": "online",
+      "arity": "Optional"
+    }
+  ]
+}
