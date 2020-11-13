@@ -4,9 +4,9 @@ name: CI
 # events but only for the main branch
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
   pull_request:
-    branches: [main]
+    branches: [main, staging]
 
 jobs:
   # This workflow contains a single job called "build"
@@ -16,7 +16,20 @@ jobs:
     strategy:
       matrix:
         node-version: [12]
-
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: simple_bank
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@main
       - name: Use Node.js ${{ matrix.node-version }}
@@ -28,9 +41,10 @@ jobs:
           CI: true
         run: |
           yarn install
+          yarn test
+          yarn prisma migrate up --experimental
           yarn build
-      - uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "satsang-app" #Must be unique in Heroku
-          heroku_email: ${{secrets.HEROKU_API_EMAIL}}
+      # - uses: codecov/codecov-action@v1
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }} # not required for public repositories
+      #     fail_ci_if_error: true # optional (default = false)
