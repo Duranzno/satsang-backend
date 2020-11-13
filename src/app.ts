@@ -1,6 +1,5 @@
 import express from "express"
 import { Application } from "express"
-// import { PrismaClient } from "@prisma/client"
 
 import middleware from "./middleware"
 import errorHandlers from "./middleware/errorHandlers"

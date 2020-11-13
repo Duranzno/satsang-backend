@@ -1,4 +1,4 @@
-name: CI
+name: test
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the main branch
@@ -20,9 +20,9 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: secret
-          POSTGRES_DB: simple_bank
+          POSTGRES_USER: action_user
+          POSTGRES_PASSWORD: action_password
+          POSTGRES_DB: action_database_name
         ports:
           - 5432:5432
         options: >-
@@ -39,6 +39,7 @@ jobs:
       - name: npm install, build, and test
         env:
           CI: true
+          DATABASE_URL: "postgresql://action_user:action_password@localhost:5432/action_database_name"
         run: |
           yarn install
           yarn test

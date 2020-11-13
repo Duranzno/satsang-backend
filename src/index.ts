@@ -4,8 +4,9 @@ import app from "./app"
 import { PORT } from "./utilities/secrets"
 import logger from "./utilities/logger"
 import prisma from "./db"
-
+console.log("HEY")
 dotenv.config()
+logger.info("Starting Process")
 app
   .listen(PORT, () => {
     logger.info(`server running on port : ${PORT}`)
