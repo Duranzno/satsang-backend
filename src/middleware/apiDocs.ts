@@ -1,5 +1,5 @@
 import path from "path"
-import fs from 'fs'
+import fs from "fs"
 
 import { Router } from "express"
 import YAML from "yamljs"
@@ -8,7 +8,7 @@ import swaggerUi from "swagger-ui-express"
 import { IS_PRODUCTION } from "../utilities"
 import logger from "../utilities/logger"
 export const getYamlFile = (): null | swaggerUi.JsonObject => {
-  let swaggerSpec: swaggerUi.JsonObject = {};
+  let swaggerSpec: swaggerUi.JsonObject = {}
   const specLocation = path.join(__dirname, "..", "openapi.yaml")
   if (fs.existsSync(specLocation)) {
     swaggerSpec = YAML.load(specLocation)
@@ -28,6 +28,7 @@ export const handleAPIDocs = (router: Router) => {
         description: "Localhost, only for development",
       })
     }
+    router.use("/json", (_req, res) => { res.json(swaggerSpec) })
     router.use("/", swaggerUi.serve)
     router.get("/", swaggerUi.setup(swaggerSpec, options))
   } else {

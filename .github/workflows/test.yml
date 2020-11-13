@@ -4,9 +4,9 @@ name: test
 # events but only for the main branch
 on:
   push:
-    branches: [main, staging]
+    branches: [wip]
   pull_request:
-    branches: [main, staging]
+    branches: [wip]
 
 jobs:
   # This workflow contains a single job called "build"
