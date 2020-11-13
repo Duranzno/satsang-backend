@@ -6,6 +6,7 @@ import logger from "./utilities/logger"
 import prisma from "./db"
 
 dotenv.config()
+logger.info("Starting Process")
 app
   .listen(PORT, () => {
     logger.info(`server running on port : ${PORT}`)

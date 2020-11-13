@@ -20,9 +20,9 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          POSTGRES_USER: your_user
-          POSTGRES_PASSWORD: your_password
-          POSTGRES_DB: your_database_name
+          POSTGRES_USER: action_user
+          POSTGRES_PASSWORD: action_password
+          POSTGRES_DB: action_database_name
         ports:
           - 5432:5432
         options: >-
@@ -39,6 +39,7 @@ jobs:
       - name: npm install, build, and test
         env:
           CI: true
+          DATABASE_URL: "postgresql://action_user:action_password@localhost:5432/action_database_name"
         run: |
           yarn install
           yarn test
