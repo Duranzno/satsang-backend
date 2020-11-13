@@ -33,6 +33,7 @@ paths:
         - event
       description: Get All Events
       summary: Get All Events
+      operationId: getAllEvents
       responses:
         200:
           description: Event Data
@@ -68,6 +69,7 @@ paths:
         - event
       description: Get Event by ID
       summary: Get Event by ID
+      operationId: getEventById
       parameters:
         - in: path
           name: id
