@@ -1,0 +1,50 @@
+name: test
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12]
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: your_user
+          POSTGRES_PASSWORD: your_password
+          POSTGRES_DB: your_database_name
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@main
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and test
+        env:
+          CI: true
+        run: |
+          yarn install
+          yarn test
+          yarn prisma migrate up --experimental
+          yarn build
+      # - uses: codecov/codecov-action@v1
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }} # not required for public repositories
+      #     fail_ci_if_error: true # optional (default = false)
