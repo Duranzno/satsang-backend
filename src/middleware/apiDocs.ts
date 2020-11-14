@@ -28,7 +28,9 @@ export const handleAPIDocs = (router: Router) => {
         description: "Localhost, only for development",
       })
     }
-    router.use("/json", (_req, res) => { res.json(swaggerSpec) })
+    router.use("/json", (_req, res) => {
+      res.json(swaggerSpec)
+    })
     router.use("/", swaggerUi.serve)
     router.get("/", swaggerUi.setup(swaggerSpec, options))
   } else {
