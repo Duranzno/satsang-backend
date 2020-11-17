@@ -1,10 +1,9 @@
 import dotenv from "dotenv"
 
 import app from "./app"
-import { PORT } from "./utilities/secrets"
+import { PORT } from "./secrets"
 import logger from "./utilities/logger"
 import prisma from "./db"
-console.log("HEY")
 dotenv.config()
 logger.info("Starting Process")
 app

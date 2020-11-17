@@ -20,9 +20,11 @@ export const clientError = (err: Error | HTTPClientError, res: Response, next: N
 }
 
 export const serverError = (err: Error, res: Response, _next: NextFunction) => {
+  logger.error({ ...err })
   if (process.env.NODE_ENV === "production") {
     res.status(500).send("Internal Server Error")
   } else {
     res.status(500).send(err.stack)
   }
 }
+

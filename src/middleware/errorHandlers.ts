@@ -26,4 +26,5 @@ const handleServerError = (router: Router) => {
   })
 }
 
+
 export default [handle404Error, handleClientError, handleServerError]

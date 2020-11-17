@@ -5,7 +5,7 @@ import { Router } from "express"
 import YAML from "yamljs"
 import swaggerUi from "swagger-ui-express"
 
-import { IS_PRODUCTION } from "../utilities"
+import { BASE_URL, IS_PRODUCTION } from "../utilities"
 import logger from "../utilities/logger"
 export const getYamlFile = (): null | swaggerUi.JsonObject => {
   let swaggerSpec: swaggerUi.JsonObject = {}
@@ -19,12 +19,13 @@ export const getYamlFile = (): null | swaggerUi.JsonObject => {
 export const handleAPIDocs = (router: Router) => {
   const options: swaggerUi.SwaggerUiOptions = {}
   const swaggerSpec = getYamlFile()
+
   if (swaggerSpec) {
-    swaggerSpec.host = "localhost:3000"
+    swaggerSpec.host = BASE_URL
     swaggerSpec.info.version = `${process.env.npm_package_version}`
     if (!IS_PRODUCTION) {
       swaggerSpec.servers.unshift({
-        url: "http://localhost:3000/",
+        url: BASE_URL,
         description: "Localhost, only for development",
       })
     }

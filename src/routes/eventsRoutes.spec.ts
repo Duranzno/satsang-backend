@@ -2,16 +2,11 @@ import { Event } from "@prisma/client"
 import request from "supertest"
 
 import app from "../app"
-import { fakeEvent, faker, prisma } from "../__tests__/utils"
-beforeAll(async () => {
-  await prisma.user.deleteMany({})
-  await prisma.event.deleteMany({})
-})
-afterAll(async () => {
-  await prisma.user.deleteMany({})
-  await prisma.event.deleteMany({})
-  await prisma.$disconnect()
-})
+import { afterAllDb, beforeAllDb, fakeEvent, faker, prisma } from "../__tests__/utils"
+
+beforeAll(beforeAllDb)
+afterAll(afterAllDb)
+
 
 test("POST event", async () => {
   const newEvent = fakeEvent()

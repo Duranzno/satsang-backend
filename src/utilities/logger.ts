@@ -3,7 +3,7 @@ import * as fs from "fs"
 import { createLogger, format, transports } from "winston"
 import DailyRotateFile from "winston-daily-rotate-file"
 
-import { ENVIRONMENT, LOG_DIRECTORY } from "./secrets"
+import { ENVIRONMENT, LOG_DIRECTORY } from "../secrets"
 
 const dir = LOG_DIRECTORY
 

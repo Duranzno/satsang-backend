@@ -1,12 +1,12 @@
-import { Router } from "express"
+import { RequestHandler, Router } from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
 import compression from "compression"
-import cookieParser from "cookie-parser"
-import session from "express-session"
 import cacheControl from "express-cache-controller"
+import timeout from 'connect-timeout'
 
-import { SESSION_SECRET } from "../utilities/secrets"
+import { IS_PRODUCTION } from "../secrets"
+import logger from "../utilities/logger"
 
 export const handleCors = (router: Router) => router.use(cors({ credentials: true, origin: true }))
 
@@ -14,24 +14,17 @@ export const handleBodyRequestParsing = (router: Router) => {
   router.use(bodyParser.urlencoded({ extended: true }))
   router.use(bodyParser.json())
 }
-export const handleSession = (router: Router) => {
-  router.use(
-    session({
-      secret: SESSION_SECRET,
-      cookie: {
-        maxAge: 60000,
-      },
-      resave: false,
-      saveUninitialized: false,
-    })
-  )
-}
 export const handleCompression = (router: Router) => {
   router.use(compression())
 }
-
-export const handleCookie = (router: Router) => {
-  router.use(cookieParser())
+export const haltOnTime: RequestHandler = (req, _res, next) => { if (!req.timedout) { next() } }
+export const handleTimeout = (router: Router) => {
+  if (!(IS_PRODUCTION || process.env.NODE_ENV === "test")) {
+    const time = "5s"
+    logger.info(`Will use a timeout of ${time}`)
+    router.use(timeout(time))
+    router.use(haltOnTime)
+  }
 }
 export const handleCaching = (router: Router) => {
   router.use(

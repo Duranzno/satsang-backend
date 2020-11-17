@@ -13,10 +13,10 @@ model User {
   updatedAt      DateTime  @updatedAt
   name           String?   @unique
   email          String    @unique
-  hashedPassword String?
+  hashedPassword String
   role           String    @default("user")
   sessions       Session[]
-  Event          Event[]
+  Events         Event[]
 }
 
 model Session {

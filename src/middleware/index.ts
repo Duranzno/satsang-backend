@@ -2,9 +2,8 @@ import {
   handleBodyRequestParsing,
   handleCaching,
   handleCompression,
-  handleCookie,
   handleCors,
-  handleSession,
+  handleTimeout,
 } from "./common"
 import { handleAPIDocs } from "./apiDocs"
 import {
@@ -13,17 +12,18 @@ import {
   // handleRateLimit
 } from "./security"
 import { handleLogging } from "./logging"
+import { handleAuth } from "./authentication"
 
 export default [
   handleCors,
   handleBodyRequestParsing,
   handleCompression,
-  handleCookie,
-  handleSession,
   handleAPIDocs,
   handleCaching,
   handleHTTPHeaders,
   handleLogging,
+  handleTimeout,
+  handleAuth,
   // handleRateLimit,
   // handleCSRF,
 ]
