@@ -5,16 +5,10 @@ import prisma from "../db"
 import { generateJWT, hashPassword } from "../utilities"
 import logger from "../utilities/logger"
 
+import { UserLoginBody, UserSignupBody } from "./interfaces"
+
 const router: Router = Router()
 router.post("/login")
-
-interface UserLoginBody {
-  email: string
-  password: string
-}
-interface UserSignupBody extends UserLoginBody {
-  name: string
-}
 
 router.post("/signup", async (req: Request<unknown, unknown, UserSignupBody>, res: Response) => {
   const { email, name, password } = req.body
@@ -35,7 +29,6 @@ router.post("/signup", async (req: Request<unknown, unknown, UserSignupBody>, re
     select: { id: true, name: true, email: true, role: true },
   })
   logger.info(`Created new User with id ${result.id}`)
-  //TODO:Start Session
   return res.json({ ...result, token: generateJWT(email, result.id + "") })
 })
 

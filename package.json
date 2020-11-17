@@ -37,7 +37,7 @@
     "version": "standard-version",
     "reset-hard": "git clean -dfx && git reset --hard && yarn",
     "prepare-release": "run-s reset-hard test  version ",
-    "pre-push": "git-branch-is -q main &&  npm run fix && npm run test || echo No hooks needed on pre-push for this branch "
+    "pre-merge-commit": "git-branch-is -q main &&  npm run fix && npm run test || echo No hooks needed on pre-merge-commit for this branch "
   },
   "engines": {
     "node": ">=10"
@@ -147,7 +147,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run pre-push"
+      "pre-merge-commit": "npm run pre-merge-commit"
     }
   }
 }

@@ -2,8 +2,7 @@ import { UserCreateInput } from "@prisma/client"
 import request from "supertest"
 
 import app from "../app"
-import prisma from "../db"
-import { afterAllDb, beforeAllDb, fakeUser } from "../__tests__/utils"
+import { afterAllDb, beforeAllDb, fakeUser, prisma } from "../__tests__/utils"
 beforeAll(beforeAllDb)
 afterAll(afterAllDb)
 jest.setTimeout(10000)
@@ -74,7 +73,7 @@ describe("auth", () => {
       const response = await request(app)
         .post("/api/auth/login")
         .set("Content-Type", "application/json")
-        .send({ password, email })
+        .send({ password, email: email.toLowerCase() })
         .set("Accept", "application/json")
         .expect(200)
       expect(response.body.email).toBeDefined()
