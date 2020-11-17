@@ -27,6 +27,46 @@ servers:
     description: Real Backend
 components:
   schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 12123
+        name:
+          example: "Tantric"
+          type: string
+      xml:
+        name: Category
+    UserLoginInput:
+      type: object
+      properties:
+        email:
+          type: string
+          example: "Smith"
+        password:
+          example: "not_safe_password"
+          type: string
+    UserSignupInput:
+      allOf:
+        - $ref: "#/components/schemas/UserLoginInput"
+        - type: object
+          properties:
+            name:
+              example: "john"
+              type: string
+    User:
+      allOf:
+        - $ref: "#/components/schemas/UserSignupInput"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 345678816523
+          xml:
+            name: User
     EventInput:
       type: object
       required:
@@ -51,103 +91,50 @@ components:
           example: 15
           type: integer
           maximum: 100
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 12123
-        name:
-          example: "Tantric"
-          type: string
-      xml:
-        name: Category
-    UserLoginInput:
-      type: object
-      properties:
-        name:
-          type: string
-          example: "John"
-        email:
-          type: string
-          example: "Smith"
-        password:
-          type: string
-    UserSignupInput:
-      $ref: "#/components/schema/UserLoginInput"
-      type: object
-      properties:
-        email:
-          example: "johnsmith@examplemail.com"
-          type: string
-        name:
-          example: "john"
-          type: string
-        password:
-          example: "not_safe_password"
-          type: string
-    User:
-      $ref: "#/components/schema/UserSignupInput"
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 345678816523
-      xml:
-        name: User
     Event:
-      type: object
-      required:
-        - name
-        - photoUrls
-      properties:
-        id:
-          type: integer
-          format: int64
-        userId:
-          type: integer
-          format: int64
-        user:
-          type: array
-          items:
-            $ref: "#/components/schemas/User"
-        categoryId:
-          type: integer
-          format: int64
-        category:
-          type: array
-          items:
-            $ref: "#/components/schemas/Category"
-        locationId:
-          type: integer
-          format: int64
-        location:
-          $ref: "#/components/schemas/Location"
-        name:
-          type: string
-          example: Relaxing Yoga
-
-        description:
-          type: string
-          example: "Description"
-        photoUrls:
-          type: array
-          xml:
-            name: photoUrl
-            wrapped: true
-          items:
-            type: string
-        categories:
-          type: array
-          xml:
-            name: categories
-            wrapped: true
-          items:
-            $ref: "#/components/schemas/Category"
-      xml:
-        name: Event
+      allOf:
+        - $ref: "#/components/schemas/EventInput"
+        - type: object
+          required:
+            - name
+            - photoUrls
+          properties:
+            id:
+              type: integer
+              format: int64
+            userId:
+              type: integer
+              format: int64
+            user:
+              type: array
+              items:
+                $ref: "#/components/schemas/User"
+            categoryId:
+              type: integer
+              format: int64
+            category:
+              type: array
+              items:
+                $ref: "#/components/schemas/Category"
+            locationId:
+              type: integer
+              format: int64
+            location:
+              $ref: "#/components/schemas/Location"
+            photoUrls:
+              type: array
+              xml:
+                name: photoUrl
+                wrapped: true
+              items:
+                type: string
+            categories:
+              type: array
+              xml:
+                name: categories
+                wrapped: true
+              items:
+                $ref: "#/components/schemas/Category"
     Location:
       type: object
       properties:
@@ -195,7 +182,7 @@ components:
     bearerAuth: # arbitrary name for the security scheme
       type: http
       scheme: bearer
-      bearerFormat: JWT
+      bearerFormat: Token
 
 paths:
   /api/event:
@@ -304,6 +291,7 @@ paths:
       summary: Create new user with mail/password
       operationId: createUser
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -311,10 +299,6 @@ paths:
       responses:
         "200":
           description: "Signup Successfull"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
         "405":
           description: Invalid input
   /api/auth/login:
@@ -324,24 +308,32 @@ paths:
       summary: Post endpoint for login user
       operationId: loginUser
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/requestBodies/UserLoginInput"
+              $ref: "#/components/schemas/UserLoginInput"
+
       responses:
         "200":
           description: "Login Successful"
         "405":
           description: Invalid input
-  /api/auth/logout:
-    post:
+  /api/auth/current:
+    get:
       tags:
         - auth
-      summary: Post for logout a new user
+      security:
+        - bearerAuth: []
+      summary: Get Current User Using Auth Data
       operationId: logout
       responses:
         "200":
-          description: "Signup Successfull"
+          description: "Sucess"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
         "405":
           description: Invalid input
 security:

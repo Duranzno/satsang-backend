@@ -80,7 +80,7 @@ describe("auth", () => {
       expect(response.body.token).toBeDefined()
     })
   })
-  describe.only("Testing Authentication", () => {
+  describe("Testing Authentication", () => {
     let user: UserCreateInput & { password: string }
     beforeAll(async () => {
       user = await fakeUser()
