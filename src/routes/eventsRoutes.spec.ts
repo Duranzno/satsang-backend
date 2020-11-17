@@ -7,7 +7,6 @@ import { afterAllDb, beforeAllDb, fakeEvent, faker, prisma } from "../__tests__/
 beforeAll(beforeAllDb)
 afterAll(afterAllDb)
 
-
 test("POST event", async () => {
   const newEvent = fakeEvent()
   const response = await request(app)

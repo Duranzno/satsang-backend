@@ -1,16 +1,16 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from "express"
-import passport from "passport";
+import passport from "passport"
 
-import prisma from "../db";
-import { generateJWT, hashPassword } from "../utilities";
-import logger from "../utilities/logger";
+import prisma from "../db"
+import { generateJWT, hashPassword } from "../utilities"
+import logger from "../utilities/logger"
 
 const router: Router = Router()
 router.post("/login")
 
 interface UserLoginBody {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 interface UserSignupBody extends UserLoginBody {
   name: string
@@ -19,9 +19,9 @@ interface UserSignupBody extends UserLoginBody {
 router.post("/signup", async (req: Request<unknown, unknown, UserSignupBody>, res: Response) => {
   const { email, name, password } = req.body
 
-  if (!email) return res.status(422).json({ errors: { email: 'is required' } });
-  if (!name) return res.status(422).json({ errors: { name: 'is required' } });
-  if (!password) return res.status(422).json({ errors: { password: 'is required' } });
+  if (!email) return res.status(422).json({ errors: { email: "is required" } })
+  if (!name) return res.status(422).json({ errors: { name: "is required" } })
+  if (!password) return res.status(422).json({ errors: { password: "is required" } })
 
   const hashedPassword = await hashPassword(password)
 
@@ -32,45 +32,52 @@ router.post("/signup", async (req: Request<unknown, unknown, UserSignupBody>, re
       hashedPassword,
       role: "user",
     },
-    select: { id: true, name: true, email: true, role: true }
+    select: { id: true, name: true, email: true, role: true },
   })
   logger.info(`Created new User with id ${result.id}`)
   //TODO:Start Session
   return res.json({ ...result, token: generateJWT(email, result.id + "") })
 })
 
-
-function auth(req: Request<unknown, unknown, UserLoginBody>, res: Response, next: NextFunction,): RequestHandler {
-  return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
-    if (err)
-      return next(err);
+function auth(
+  req: Request<unknown, unknown, UserLoginBody>,
+  res: Response,
+  next: NextFunction
+): RequestHandler {
+  return passport.authenticate("local", { session: false }, (err, passportUser, info) => {
+    if (err) return next(err)
     try {
-      if (!passportUser && info?.message) { throw Error(info.message); }
-      else {
-        const user = passportUser;
-        user.token = generateJWT(user.email, user.id);
-        return res.json(user);
+      if (!passportUser && info?.message) {
+        throw Error(info.message)
+      } else {
+        const user = passportUser
+        user.token = generateJWT(user.email, user.id)
+        return res.json(user)
       }
     } catch (error) {
-      return res.status(401).send({ message: error?.message ?? "Error on Authorization" });
+      return res.status(401).send({ message: error?.message ?? "Error on Authorization" })
     }
-  })(req, res, next);
+  })(req, res, next)
 }
-router.post("/login", async (req: Request<unknown, unknown, UserLoginBody>, res: Response, next: NextFunction) => {
-  const { email, password } = req.body
+router.post(
+  "/login",
+  async (req: Request<unknown, unknown, UserLoginBody>, res: Response, next: NextFunction) => {
+    const { email, password } = req.body
 
-  if (!email) return res.status(422).json({ errors: { email: 'is required' } });
-  if (!password) return res.status(422).json({ errors: { password: 'is required' } });
+    if (!email) return res.status(422).json({ errors: { email: "is required" } })
+    if (!password) return res.status(422).json({ errors: { password: "is required" } })
 
-  return auth(req, res, next);
-})
+    return auth(req, res, next)
+  }
+)
 
-
-router.get("/current", passport.authenticate('jwt', { session: false }), async (req: Request, res: Response) => {
-  res.json(req.user)
-})
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    res.json(req.user)
+  }
+)
 
 const AuthRoutes: Router = router
 export default AuthRoutes
-
-

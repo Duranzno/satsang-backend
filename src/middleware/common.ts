@@ -3,7 +3,7 @@ import cors from "cors"
 import bodyParser from "body-parser"
 import compression from "compression"
 import cacheControl from "express-cache-controller"
-import timeout from 'connect-timeout'
+import timeout from "connect-timeout"
 
 import { IS_PRODUCTION } from "../secrets"
 import logger from "../utilities/logger"
@@ -17,7 +17,11 @@ export const handleBodyRequestParsing = (router: Router) => {
 export const handleCompression = (router: Router) => {
   router.use(compression())
 }
-export const haltOnTime: RequestHandler = (req, _res, next) => { if (!req.timedout) { next() } }
+export const haltOnTime: RequestHandler = (req, _res, next) => {
+  if (!req.timedout) {
+    next()
+  }
+}
 export const handleTimeout = (router: Router) => {
   if (!(IS_PRODUCTION || process.env.NODE_ENV === "test")) {
     const time = "5s"

@@ -1,5 +1,5 @@
 import SecurePassword from "secure-password"
-import { Strategy } from 'passport-local'
+import { Strategy } from "passport-local"
 
 import prisma from "../db"
 
@@ -21,11 +21,11 @@ export const verifyPassword = async (hashedPassword: string, password: string) =
 }
 export enum AUTH_ERRORS {
   NO_USER = "Incorrect User",
-  BAD_PASSWORD = "Incorrect Password"
+  BAD_PASSWORD = "Incorrect Password",
 }
 export const localAuthenticateUser = async (email: string, password: string) => {
   const user = await prisma.user.findOne({
-    where: { email: email.toLowerCase() }
+    where: { email: email.toLowerCase() },
   })
 
   if (!user) throw new Error(AUTH_ERRORS.NO_USER)
@@ -39,7 +39,7 @@ export const localAuthenticateUser = async (email: string, password: string) => 
       const improvedHash = await hashPassword(password)
       await prisma.user.update({
         where: { id: user.id },
-        data: { hashedPassword: improvedHash }
+        data: { hashedPassword: improvedHash },
       })
       break
     default:
@@ -51,20 +51,21 @@ export const localAuthenticateUser = async (email: string, password: string) => 
   return rest
 }
 
-export const LocalStrategy = new Strategy({
-  usernameField: 'email',
-  passwordField: 'password',
-},
+export const LocalStrategy = new Strategy(
+  {
+    usernameField: "email",
+    passwordField: "password",
+  },
   async function (email, password, done) {
     try {
-      const user = await localAuthenticateUser(email, password);
-      return done(null, user);
+      const user = await localAuthenticateUser(email, password)
+      return done(null, user)
     } catch (error) {
       if (Object.values(AUTH_ERRORS).includes(error?.message)) {
-        return done(null, false, { message: error.message });
+        return done(null, false, { message: error.message })
       }
-      logger.info("Error on Passport Local Auth", error);
-      return done(error);
+      logger.info("Error on Passport Local Auth", error)
+      return done(error)
     }
   }
-);
+)

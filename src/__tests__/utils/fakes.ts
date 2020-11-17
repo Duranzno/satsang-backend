@@ -15,6 +15,6 @@ export const fakeUser = async (): Promise<UserCreateInput & { password: string }
     password,
     name: faker.name.firstName(),
     email: faker.internet.email(),
-    hashedPassword: await hashPassword(password)
+    hashedPassword: await hashPassword(password),
   }
 }

@@ -43,7 +43,7 @@ describe("auth", () => {
     let user: UserCreateInput & { password: string }
     beforeAll(async () => {
       user = await fakeUser()
-      const { name, email, hashedPassword } = user;
+      const { name, email, hashedPassword } = user
       await prisma.user.create({ data: { name, email: email.toLowerCase(), hashedPassword } })
     })
     test("422 no password", async () => {
@@ -56,7 +56,9 @@ describe("auth", () => {
       expect(response.error).toBeDefined()
     })
     test("wrong password", async (done) => {
-      expect(await prisma.user.findOne({ where: { email: user.email.toLowerCase() } })).toBeDefined()
+      expect(
+        await prisma.user.findOne({ where: { email: user.email.toLowerCase() } })
+      ).toBeDefined()
       const response = await request(app)
         .post("/api/auth/login")
         .set("Content-Type", "application/json")
@@ -65,10 +67,9 @@ describe("auth", () => {
         .expect(401)
       expect(response.error).toBeDefined()
       done()
-
     })
     test("correct login with token", async () => {
-      const { email, password } = user;
+      const { email, password } = user
 
       const response = await request(app)
         .post("/api/auth/login")
@@ -84,17 +85,17 @@ describe("auth", () => {
     let user: UserCreateInput & { password: string }
     beforeAll(async () => {
       user = await fakeUser()
-      const { name, email, hashedPassword } = user;
+      const { name, email, hashedPassword } = user
       await prisma.user.create({ data: { name, email: email.toLowerCase(), hashedPassword } })
     })
     test("forbidden acces to unregistered", async () => {
-      await request(app)
-        .get("/api/auth/current")
-        .expect(401)
+      await request(app).get("/api/auth/current").expect(401)
     })
     test("enabling access to logged user", async () => {
-      const { email, password } = user;
-      const { body: { token } } = await request(app)
+      const { email, password } = user
+      const {
+        body: { token },
+      } = await request(app)
         .post("/api/auth/login")
         .set("Content-Type", "application/json")
         .send({ password, email })
