@@ -10,6 +10,7 @@ import { UserLoginBody, UserSignupBody } from "./interfaces"
 const router: Router = Router()
 router.post("/login")
 
+
 router.post("/signup", async (req: Request<unknown, unknown, UserSignupBody>, res: Response) => {
   const { email, name, password } = req.body
 

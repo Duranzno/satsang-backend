@@ -3,8 +3,9 @@ import { Request, Response, Router } from "express"
 
 import prisma from "../db"
 
-import { IdParams } from "./interfaces"
+import { IdParams } from './interfaces'
 const router: Router = Router()
+
 
 router.get("/", async (_req: Request, res: Response) => {
   const result = await prisma.event.findMany()
