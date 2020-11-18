@@ -7,7 +7,14 @@ import { IdParams } from './interfaces'
 const router: Router = Router()
 
 
-router.get("/", async (_req: Request<unknown, unknown, { categories?: string[] }>, res: Response) => {
+type GetEventsReqQuery = {
+  categories?: string[]
+  lat?: string
+  lng?: string
+}
+
+router.get("/", async (_req: Request<unknown, unknown, unknown, GetEventsReqQuery>, res: Response) => {
+  // const { categories, lat, lng } = _req.query
   const result = await prisma.event.findMany()
   res.json(result)
 })

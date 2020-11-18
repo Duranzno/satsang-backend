@@ -42,15 +42,21 @@ describe('GET /', () => {
     const first: Event = res.body.pop()
     expect(first.title).toBeDefined()
   })
-  // test.skip('should get all events inside one category ', async () => {
+  test.skip('should get all events inside one category ', async () => {
+    const categoriesData = ["", "", ""]
+    const categories = `${categoriesData[0]},${categoriesData[1]}`
+    await request(app).get(`/api/event`).query({ categories }).expect(200)
 
-  //   const res = await request(app).get(`/api/event?categories=${categories[1]},${categories[2]}`).expect(200)
-
-  // });
+  });
+  test.skip('should get all events based on location ', async () => {
+    const lng = 1
+    const lat = 1
+    await request(app).get(`/ api / event ? `).query({ lat, lng }).expect(200)
+  });
 });
 test("GET specific event", async () => {
   const e = await prisma.event.create({ data: { ...await fakeEvent() } })
-  const res = await request(app).get(`/api/event/${e.id}`).expect(200)
+  const res = await request(app).get(`/ api / event / ${e.id} `).expect(200)
   expect((res.body as Event).title).toBe(e.title)
 })
 
@@ -63,7 +69,7 @@ test("PUT specific event", async () => {
   }
 
   const res = await request(app)
-    .put(`/api/event/${e.id}`)
+    .put(`/ api / event / ${e.id} `)
     .set("Content-Type", "application/json")
     .send(updatedData)
     .expect(200)
@@ -79,7 +85,7 @@ test("PUT specific event", async () => {
 test("GET specific event", async () => {
   const e = await prisma.event.create({ data: { ...await fakeEvent() } })
   const originalList = await prisma.event.findMany({})
-  const res = await request(app).delete(`/api/event/${e.id}`).expect(200)
+  const res = await request(app).delete(`/ api / event / ${e.id} `).expect(200)
 
   expect((res.body as Event).title).toBe(e.title)
 

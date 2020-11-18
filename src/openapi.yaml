@@ -189,6 +189,28 @@ paths:
     get:
       tags:
         - event
+      parameters:
+        - in: query
+          name: categories
+          description: This will filter events depending on the existing categories. If multiple events separated by comma.
+          required: false
+          example: "Zen,Yoga"
+          schema:
+            type: string
+        - in: query
+          name: lat
+          description: This will filter events depending on the location, it will need the other parameters longitude.
+          required: false
+          example: 1
+          schema:
+            type: string
+        - in: query
+          name: lng
+          description: This will filter events depending on the location, it will need the other parameter latitude.
+          required: false
+          example: 1
+          schema:
+            type: string
       description: Get All Events
       summary: Get All Events
       operationId: getAllEvents
