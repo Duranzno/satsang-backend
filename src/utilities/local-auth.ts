@@ -5,6 +5,8 @@ import prisma from "../db"
 
 import logger from "./logger"
 
+
+
 const SP = new SecurePassword()
 
 export const hashPassword = async (password: string) => {

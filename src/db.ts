@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 
-import { IS_PRODUCTION } from "./utilities"
-import logger from "./utilities/logger"
+import { IS_PRODUCTION, logger } from "./utilities"
+
 
 const prisma = new PrismaClient({
   // errorFormat: IS_PRODUCTION ? "minimal" : "pretty",

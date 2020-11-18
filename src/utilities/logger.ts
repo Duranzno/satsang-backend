@@ -30,8 +30,7 @@ const options = {
     maxFiles: "14d",
   },
 }
-
-export default createLogger({
+export const logger = createLogger({
   transports: [
     new transports.Console({
       stderrLevels: ["info", "error"],
@@ -41,3 +40,4 @@ export default createLogger({
   exceptionHandlers: [new DailyRotateFile(options.file)],
   exitOnError: false, // do not exit on handled exceptions
 })
+export default logger

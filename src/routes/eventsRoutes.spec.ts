@@ -8,7 +8,7 @@ beforeAll(beforeAllDb)
 afterAll(afterAllDb)
 
 test("POST event", async () => {
-  const newEvent = fakeEvent()
+  const newEvent = await fakeEvent()
   const response = await request(app)
     .post("/api/event")
     .set("Content-Type", "application/json")
@@ -21,22 +21,41 @@ test("POST event", async () => {
   const created = await prisma.event.findFirst({ where: { title: newEvent.title } })
   expect(created?.description).toBe(newEvent.description)
 })
-test("GET all events", async () => {
-  const res = await request(app).get("/api/event").expect(200)
-  expect(res.body).toBeDefined()
-  expect(res.body?.length).toBeGreaterThanOrEqual(1)
-  const first: Event = res.body.pop()
-  expect(first.title).toBeDefined()
-})
+describe('GET /', () => {
+  // let event: Event;
+  // beforeAll(async () => {
+  //   const data = await fakeEvent()
+  // event = await prisma.event.create({
+  // data: { ...data, Category: { create: [] } },
+  // 
+  // })
+  //   expect
+  // });
+  afterAll(async () => {
+    await prisma.user.deleteMany({})
+    await prisma.event.deleteMany({})
+  })
+  test("GET all events", async () => {
+    const res = await request(app).get("/api/event").expect(200)
+    expect(res.body).toBeDefined()
+    expect(res.body?.length).toBeGreaterThanOrEqual(1)
+    const first: Event = res.body.pop()
+    expect(first.title).toBeDefined()
+  })
+  // test.skip('should get all events inside one category ', async () => {
 
+  //   const res = await request(app).get(`/api/event?categories=${categories[1]},${categories[2]}`).expect(200)
+
+  // });
+});
 test("GET specific event", async () => {
-  const e = await prisma.event.create({ data: { ...fakeEvent() } })
+  const e = await prisma.event.create({ data: { ...await fakeEvent() } })
   const res = await request(app).get(`/api/event/${e.id}`).expect(200)
   expect((res.body as Event).title).toBe(e.title)
 })
 
 test("PUT specific event", async () => {
-  const e = await prisma.event.create({ data: { ...fakeEvent() } })
+  const e = await prisma.event.create({ data: { ...await fakeEvent() } })
   const updatedData: Partial<Event> = {
     description: faker.lorem.paragraph(),
     online: false,
@@ -58,7 +77,7 @@ test("PUT specific event", async () => {
 })
 
 test("GET specific event", async () => {
-  const e = await prisma.event.create({ data: { ...fakeEvent() } })
+  const e = await prisma.event.create({ data: { ...await fakeEvent() } })
   const originalList = await prisma.event.findMany({})
   const res = await request(app).delete(`/api/event/${e.id}`).expect(200)
 

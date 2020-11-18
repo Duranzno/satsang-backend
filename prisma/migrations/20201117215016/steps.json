@@ -1,0 +1,27 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "followerId"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "eventId"
+        },
+        "directive": "unique"
+      }
+    }
+  ]
+}

@@ -336,6 +336,110 @@ paths:
                 $ref: "#/components/schemas/User"
         "405":
           description: Invalid input
+  /api/user/{id}:
+    get:
+      description: Get User data with their Events
+      summary: Get User data with their Events
+      operationId: getUser
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      description: Update User Data
+      summary: Update User Data
+      operationId: updateUser
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      description: Delete User
+      summary: Delete User
+      operationId: deleteUser
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /api/user/{id}/attendance/{eventId}:
+    put:
+      description: Attend event
+      summary: Attend event
+      operationId: attendEvent
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: eventId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      description: Unattend Event
+      summary: Unattend Event
+      operationId: unattendEvent
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: eventId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
 security:
   - bearerAuth: []
 externalDocs:

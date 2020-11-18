@@ -1,0 +1,32 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "Events",
+      "type": "FollowersOfEvents",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "FollowersOfEvents"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "Event"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Event",
+      "field": "User"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Event",
+      "field": "userId"
+    }
+  ]
+}

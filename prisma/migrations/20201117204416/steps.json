@@ -1,0 +1,435 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateModel",
+      "model": "FollowersOfEvents"
+    },
+    {
+      "tag": "CreateField",
+      "model": "FollowersOfEvents",
+      "field": "Follower",
+      "type": "User",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "Follower"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "Follower"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[followerId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "Follower"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "FollowersOfEvents",
+      "field": "followerId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "FollowersOfEvents",
+      "field": "Event",
+      "type": "Event",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "Event"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "Event"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[eventId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "Event"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "FollowersOfEvents",
+      "field": "eventId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "FollowersOfEvents",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "FollowersOfEvents",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "FollowersOfEvents"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "FollowersOfEvents"
+        },
+        "directive": "id"
+      },
+      "argument": "",
+      "value": "[followerId, eventId]"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "Session"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "photoUrl",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "FollowingEvents",
+      "type": "Event",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "InstructedEvents",
+      "type": "Event",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "InstructedEvents"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "InstructedEvents"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"instructorTable\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "FollowersOfEvents",
+      "type": "FollowersOfEvents",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "sessions"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "Events"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Category",
+      "field": "posts",
+      "type": "Event",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Category",
+      "field": "events"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Event",
+      "field": "Instructor",
+      "type": "User",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Event",
+          "field": "Instructor"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Event",
+          "field": "Instructor"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"instructorTable\""
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Event",
+          "field": "Instructor"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[instructorId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Event",
+          "field": "Instructor"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Event",
+      "field": "instructorId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Event",
+      "field": "Categories",
+      "type": "Category",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Event",
+      "field": "Location",
+      "type": "Location",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Event",
+      "field": "FollowersOfEvents",
+      "type": "FollowersOfEvents",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Event",
+      "field": "location"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Event",
+      "field": "locationId"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Event",
+      "field": "Category"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Event",
+      "field": "categoryId"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Event",
+      "field": "id",
+      "type": "Int"
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Event",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "newValue": "autoincrement()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Location",
+      "field": "Event",
+      "type": "Event",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Location",
+          "field": "Event"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Location",
+          "field": "Event"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[eventId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Location",
+          "field": "Event"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Location",
+      "field": "eventId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Location",
+      "field": "events"
+    }
+  ]
+}

@@ -2,8 +2,8 @@ import { NextFunction, Request, RequestHandler, Response, Router } from "express
 import passport from "passport"
 
 import prisma from "../db"
-import { generateJWT, hashPassword } from "../utilities"
-import logger from "../utilities/logger"
+import { generateJWT, hashPassword, logger } from "../utilities"
+
 
 import { UserLoginBody, UserSignupBody } from "./interfaces"
 

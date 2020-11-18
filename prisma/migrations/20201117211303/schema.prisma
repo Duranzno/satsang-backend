@@ -4,11 +4,11 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 model User {
-  id               String              @id @default(cuid())
+  id               Int                 @id @default(autoincrement())
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
   email            String              @unique
@@ -21,14 +21,14 @@ model User {
 }
 
 model Category {
-  id    String  @id @default(cuid())
+  id    Int     @id @default(autoincrement())
   name  String
   posts Event[]
 }
 
 /// These will be the online/offline events
 model Event {
-  id                String              @id @default(cuid())
+  id                Int                 @id @default(autoincrement())
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   title             String
@@ -37,7 +37,7 @@ model Event {
   duration          Int
   description       String?
   Instructor        User                @relation("instructorTable", fields: [instructorId], references: [id])
-  instructorId      String
+  instructorId      Int
   online            Boolean?            @default(true)
   Categories        Category[]
   FollowersOfEvents FollowersOfEvents[]
@@ -46,18 +46,18 @@ model Event {
 
 model FollowersOfEvents {
   Follower   User     @relation(fields: [followerId], references: [id])
-  followerId String
+  followerId Int
   Event      Event    @relation(fields: [eventId], references: [id])
-  eventId    String
+  eventId    Int
   createdAt  DateTime @default(now())
 
   @@id([followerId, eventId])
 }
 
 model Location {
-  id      String @id @default(cuid())
-  Event   Event  @relation(fields: [eventId], references: [id])
-  eventId String
+  id      Int   @id @default(autoincrement())
+  Event   Event @relation(fields: [eventId], references: [id])
+  eventId Int
   lat     Float
   lng     Float
 }
