@@ -3,13 +3,16 @@ import { PrismaClient } from "@prisma/client"
 export const prisma = new PrismaClient({ errorFormat: "pretty" })
 export * from "./fakes"
 export { default as faker } from "faker"
-
-export async function beforeAllDb() {
-  await prisma.user.deleteMany({})
+async function deleteAll() {
+  await prisma.followersOfEvents.deleteMany({})
   await prisma.event.deleteMany({})
+  await prisma.user.deleteMany({})
+
+}
+export async function beforeAllDb() {
+  await deleteAll()
 }
 export async function afterAllDb() {
-  await prisma.user.deleteMany({})
-  await prisma.event.deleteMany({})
+  await deleteAll()
   await prisma.$disconnect()
 }

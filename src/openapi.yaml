@@ -189,6 +189,28 @@ paths:
     get:
       tags:
         - event
+      parameters:
+        - in: query
+          name: categories
+          description: This will filter events depending on the existing categories. If multiple events separated by comma.
+          required: false
+          example: "Zen,Yoga"
+          schema:
+            type: string
+        - in: query
+          name: lat
+          description: This will filter events depending on the location, it will need the other parameters longitude.
+          required: false
+          example: 1
+          schema:
+            type: string
+        - in: query
+          name: lng
+          description: This will filter events depending on the location, it will need the other parameter latitude.
+          required: false
+          example: 1
+          schema:
+            type: string
       description: Get All Events
       summary: Get All Events
       operationId: getAllEvents
@@ -336,6 +358,110 @@ paths:
                 $ref: "#/components/schemas/User"
         "405":
           description: Invalid input
+  /api/user/{id}:
+    get:
+      description: Get User data with their Events
+      summary: Get User data with their Events
+      operationId: getUser
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      description: Update User Data
+      summary: Update User Data
+      operationId: updateUser
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      description: Delete User
+      summary: Delete User
+      operationId: deleteUser
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /api/user/{id}/attendance/{eventId}:
+    put:
+      description: Attend event
+      summary: Attend event
+      operationId: attendEvent
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: eventId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      description: Unattend Event
+      summary: Unattend Event
+      operationId: unattendEvent
+      parameters:
+        - in: path
+          name: id
+          description: UserId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: eventId
+          description: eventId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
 security:
   - bearerAuth: []
 externalDocs:

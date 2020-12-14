@@ -1,7 +1,9 @@
 import { NextFunction, Response } from "express"
 
 import { HTTP404Error, HTTPClientError } from "../utilities/httpErrors"
-import logger from "../utilities/logger"
+
+import logger from "./logger"
+
 
 export const notFoundError = () => {
   throw new HTTP404Error("Method not found.")

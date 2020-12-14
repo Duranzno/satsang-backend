@@ -1,0 +1,109 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "User",
+      "field": "id",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "newValue": "cuid()"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Category",
+      "field": "id",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Category",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "newValue": "cuid()"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Event",
+      "field": "id",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Event",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "newValue": "cuid()"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Event",
+      "field": "instructorId",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Location",
+      "field": "id",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Location",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "newValue": "cuid()"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Location",
+      "field": "eventId",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "FollowersOfEvents",
+      "field": "followerId",
+      "type": "String"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "FollowersOfEvents",
+      "field": "eventId",
+      "type": "String"
+    }
+  ]
+}

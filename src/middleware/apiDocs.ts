@@ -5,8 +5,8 @@ import { Router } from "express"
 import YAML from "yamljs"
 import swaggerUi from "swagger-ui-express"
 
-import { BASE_URL, IS_PRODUCTION } from "../utilities"
-import logger from "../utilities/logger"
+import { BASE_URL, IS_PRODUCTION, logger } from "../utilities"
+
 export const getYamlFile = (): null | swaggerUi.JsonObject => {
   let swaggerSpec: swaggerUi.JsonObject = {}
   const specLocation = path.join(__dirname, "..", "openapi.yaml")

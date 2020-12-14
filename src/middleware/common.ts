@@ -6,7 +6,8 @@ import cacheControl from "express-cache-controller"
 import timeout from "connect-timeout"
 
 import { IS_PRODUCTION } from "../secrets"
-import logger from "../utilities/logger"
+import { logger } from "../utilities"
+
 
 export const handleCors = (router: Router) => router.use(cors({ credentials: true, origin: true }))
 

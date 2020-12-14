@@ -23,7 +23,7 @@
     "test": "run-s build test:*",
     "test:lint": "eslint src --ext .ts",
     "test:spelling": "cspell \"{README.md,.github/*.md,src/**/*.ts[x]}\"",
-    "test:frontend-generator": "yarn restful-react import --file src/openapi.yaml --output build/generated",
+    "test:openapi": "yarn restful-react import --file src/openapi.yaml --output build/generated",
     "test:unit": "jest",
     "check-cli": "run-s test diff-integration-tests check-integration-tests",
     "check-integration-tests": "run-s check-integration-test:*",

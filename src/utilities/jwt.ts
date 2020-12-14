@@ -6,6 +6,8 @@ import prisma from "../db"
 
 import logger from "./logger"
 
+
+
 const algorithm = "HS256"
 export const generateJWT = (email: string, id: string): string | Error => {
   const today = new Date()
