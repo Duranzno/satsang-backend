@@ -2,6 +2,9 @@
   "version": "0.1",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
   "language": "en",
+  "import": [
+    "node_modules/cspell-dict-es-es/cspell-ext.json"
+  ],
   "words": [
     "cimg",
     "circleci",

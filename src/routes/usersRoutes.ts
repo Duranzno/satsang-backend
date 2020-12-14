@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Request, Response, Router } from "express"
 
 import prisma from "../db"
@@ -24,7 +25,7 @@ router.put("/:id", async (req: Request<IdParams, unknown, UserSignupBody>, res: 
   res.send(result)
 })
 
-router.delete("/:id", async (req: Request<IdParams, unknown, unknown>, res: Response) => {
+router.delete("/:id", async (_req: Request<IdParams, unknown, unknown>, res: Response) => {
   // Prisma does not support this yet (cascaidng deletion) so in a future this should be added to a queue and the run as script like  https://www.prisma.io/docs/guides/database-workflows/cascading-deletes/postgresql#9-validate-the-deletion-behavior-in-a-nodejs-script
   // await prisma.followersOfEvents.delete({
   // })
